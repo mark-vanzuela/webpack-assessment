@@ -4,9 +4,9 @@
   "description": "Webpack Assessment",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --env production",
+    "build": "webpack",
     "watch": "npm run build -- --watch",
-    "start": "nodemon -w webpack.config.js -x webpack-dev-server -- --open --env development"
+    "start": "nodemon -w webpack.config.js -x webpack-dev-server -- --open"
   },
   "repository": {
     "type": "git",

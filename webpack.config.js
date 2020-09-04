@@ -7,12 +7,12 @@ module.exports = function (env) {
       main: './src/js/index.js',
     },
     output: {
-      path: path.resolve(__dirname, 'public'),
+      path: path.resolve(__dirname, 'dest'),
       filename: '[name].[contentHash].bundle.js',
       publicPath: '/',
     },
     devServer: {
-      contentBase: path.resolve(__dirname, 'public'),
+      contentBase: path.resolve(__dirname, 'dest'),
       publicPath: '/',
     },
     module: {
