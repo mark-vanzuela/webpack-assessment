@@ -1,20 +1,36 @@
-
 const path = require('path');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const { config } = require('process');
-
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = function (env) {
-  const isDevelopment = env === 'development';
-  console.log(
-    `This is a ${isDevelopment ? 'development' : 'production'} build`
-  );
-  const baseConfig = {
-    entry: './app/app.js',
+  return {
+    entry: {
+      vendor: ['./src/js/vendors/vendor1.js', './src/js/vendors/vendor2.js'],
+      main: './src/js/index.js',
+    },
     output: {
-      path: path.resolve(__dirname, 'app/dist'),
-      publicPath: '/dist/',
-      filename: 'app.bundle.js',
-    }
-  }
-}
+      path: path.resolve(__dirname, 'public'),
+      filename: '[name].[contentHash].bundle.js',
+      publicPath: '/',
+    },
+    devServer: {
+      contentBase: path.resolve(__dirname, 'public'),
+      publicPath: '/',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+          },
+        },
+      ],
+    },
+    plugins: [
+      new HtmlWebPackPlugin({
+        template: './public/index.html',
+        filename: './index.html',
+      }),
+    ],
+  };
+};
